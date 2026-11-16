@@ -1,0 +1,77 @@
+import type { Exam } from './types';
+import { L } from './questions/h';
+
+export const EXAMS: Exam[] = [
+  {
+    id: 'foundations-quick',
+    title: L('Temel bilgiler hızlı kontrol', 'Foundations quick check'),
+    description: L('Modül 1–3: sistem programlamaya giriş, UNIX yapısı, C derleme, komut satırı argümanları, çekirdek/kullanıcı modu ve sistem çağrısı hataları. Kısa ve kolay.', 'Modules 1–3: intro, UNIX architecture, C compilation, command-line arguments, kernel/user mode and system call errors. Short and easy.'),
+    level: 1,
+    minutes: 20,
+    shuffle: true,
+    questionIds: ['m1-q02', 'm1-q04', 'm1-q09', 'm1-q12', 'm2-q01', 'm2-q02', 'm2-q07', 'm2-q08', 'm2-q13', 'm3-q02', 'm3-q08', 'm3-q12'],
+  },
+  {
+    id: 'midterm-a',
+    title: L('Ara sınav A', 'Midterm A'),
+    description: L('Tüm müfredattan karışık sorular (orta düzey): temel kavramlar, derleme, sistem çağrıları, fork/wait ve exec.', 'Mixed questions from the whole curriculum (medium level): fundamentals, compilation, system calls, fork/wait and exec.'),
+    level: 2,
+    minutes: 40,
+    shuffle: true,
+    questionIds: [
+      'm1-q03', 'm1-q10', 'm1-q14',
+      'm2-q03', 'm2-q10', 'm2-q11',
+      'm3-q01', 'm3-q09', 'm3-q10',
+      'm4-q01', 'm4-q03', 'm4-q06', 'm4-q07', 'm4-q22', 'm4-q28', 'm4-q41',
+      'm5-q01', 'm5-q06', 'm5-q15', 'm5-q17',
+    ],
+  },
+  {
+    id: 'midterm-b',
+    title: L('Ara sınav B', 'Midterm B'),
+    description: L('Ara sınav A’dan farklı sorularla tüm müfredat (orta düzey). Her modülden en az bir soru içerir.', 'The whole curriculum (medium level) with different questions than Midterm A. Contains at least one question from every module.'),
+    level: 2,
+    minutes: 40,
+    shuffle: true,
+    questionIds: [
+      'm1-q06', 'm1-q07', 'm1-q11',
+      'm2-q04', 'm2-q05', 'm2-q12',
+      'm3-q03', 'm3-q05', 'm3-q06', 'm3-q07',
+      'm4-q02', 'm4-q05', 'm4-q08', 'm4-q20', 'm4-q27', 'm4-q31', 'm4-q47',
+      'm5-q03', 'm5-q07', 'm5-q16',
+    ],
+  },
+  {
+    id: 'fork-drill',
+    title: L('fork() alıştırması', 'fork() Drill'),
+    description: L('Sınav tarzı fork() soruları: döngüler, koşullar içinde fork, `&&`/`||`, tampon etkisi, wait sıralaması ve işlem ağaçları. Zor.', 'Exam-style fork() questions: loops, fork in conditions, `&&`/`||`, buffering effects, wait ordering and process trees. Hard.'),
+    level: 3,
+    minutes: 35,
+    shuffle: true,
+    questionIds: ['m4-q09', 'm4-q10', 'm4-q11', 'm4-q12', 'm4-q13', 'm4-q14', 'm4-q15', 'm4-q16', 'm4-q17', 'm4-q18', 'm4-q19', 'm4-q21', 'm4-q44', 'm4-q45', 'm4-q46'],
+  },
+  {
+    id: 'processes-exec',
+    title: L('İşlemler ve exec', 'Processes & exec'),
+    description: L('Modül 4–5: fork, PID/PPID, öksüz ve zombi işlemler, wait/exit durumu, exec, system ve kabuğun çalışma biçimi.', 'Modules 4–5: fork, PID/PPID, orphans and zombies, wait/exit status, exec, system and how the shell works.'),
+    level: 2,
+    minutes: 35,
+    shuffle: true,
+    questionIds: ['m4-q04', 'm4-q23', 'm4-q24', 'm4-q25', 'm4-q29', 'm4-q30', 'm4-q33', 'm4-q34', 'm4-q35', 'm4-q42', 'm4-q43', 'm5-q02', 'm5-q05', 'm5-q09', 'm5-q11'],
+  },
+  {
+    id: 'final-exam',
+    title: L('Final sınavı', 'Final exam'),
+    description: L('Tüm konulardan kapsamlı ve zor bir sınav: fork hesapları, senaryo soruları, sistem çağrısı hataları, exec ve bellek düzeni.', 'A comprehensive, hard exam across all topics: fork counting, scenario questions, system call errors, exec and memory layout.'),
+    level: 3,
+    minutes: 60,
+    shuffle: true,
+    questionIds: [
+      'm1-q08', 'm1-q13',
+      'm2-q09', 'm2-q15',
+      'm3-q13', 'm3-q14', 'm3-q15', 'm3-q16',
+      'm4-q10', 'm4-q11', 'm4-q13', 'm4-q19', 'm4-q21', 'm4-q26', 'm4-q32', 'm4-q36', 'm4-q37', 'm4-q38', 'm4-q39', 'm4-q40',
+      'm5-q08', 'm5-q10', 'm5-q14', 'm5-q18', 'm5-q20',
+    ],
+  },
+];
