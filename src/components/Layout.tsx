@@ -9,6 +9,8 @@ import { useProgress } from '../lib/progress';
 import { Icon, type IconName } from './Icon';
 import { plain } from './Markup';
 
+const isDesktopSafe = () => typeof window !== 'undefined' && !!window.matchMedia && window.matchMedia('(min-width: 1024px)').matches;
+
 function useTheme() {
   const [theme, setTheme] = useState<'light' | 'dark'>(() => (document.documentElement.dataset.theme as 'light' | 'dark') || 'light');
   useEffect(() => {
@@ -24,6 +26,10 @@ export function Layout({ children }: { children: ReactNode }) {
   const route = useRoute();
   const prog = useProgress();
   const [open, setOpen] = useState(false);
+  const [collapsed, setCollapsed] = useState(() => { try { return localStorage.getItem('sp.sidebar') === 'closed'; } catch { return false; } });
+  useEffect(() => { try { localStorage.setItem('sp.sidebar', collapsed ? 'closed' : 'open'); } catch { /* ignore */ } }, [collapsed]);
+  const isDesktop = () => window.matchMedia('(min-width: 1024px)').matches;
+  const toggleNav = () => (isDesktop() ? setCollapsed((c) => !c) : setOpen(true));
   const [searching, setSearching] = useState(false);
   const [theme, setTheme] = useTheme();
   const page = route.path[0] ?? '';
@@ -54,7 +60,7 @@ export function Layout({ children }: { children: ReactNode }) {
     <>
       <a className="skip-link" href="#main" onClick={(e) => { e.preventDefault(); document.getElementById('main')?.focus(); }}>{t('nav.skip')}</a>
       <header className="topbar">
-        <button className="btn ghost icon menu-btn" onClick={() => setOpen(true)} aria-label={t('nav.menu')} aria-expanded={open}>
+        <button className="btn ghost icon menu-btn" onClick={toggleNav} aria-label={t('nav.toggleSidebar')} title={t('nav.toggleSidebar')} aria-controls="sidebar" aria-expanded={isDesktopSafe() ? !collapsed : open}>
           <Icon name="menu" />
         </button>
         <a className="brand" href={href()}>
@@ -77,10 +83,10 @@ export function Layout({ children }: { children: ReactNode }) {
           <Icon name={theme === 'dark' ? 'sun' : 'moon'} />
         </button>
       </header>
-      <div className="layout">
+      <div className={'layout' + (collapsed ? ' collapsed' : '')}>
         <div className={'scrim' + (open ? ' open' : '')} onClick={() => setOpen(false)} />
-        <nav className={'sidebar' + (open ? ' open' : '')} aria-label={t('nav.lessons')}>
-          <div className="btn-row menu-btn" style={{ justifyContent: 'flex-end', marginBottom: 8 }}>
+        <nav id="sidebar" className={'sidebar' + (open ? ' open' : '')} aria-hidden={collapsed && isDesktopSafe() ? true : undefined} inert={collapsed && isDesktopSafe() ? true : undefined} aria-label={t('nav.lessons')}>
+          <div className="btn-row drawer-close" style={{ justifyContent: 'flex-end', marginBottom: 8 }}>
             <button className="btn ghost icon" onClick={() => setOpen(false)} aria-label={t('nav.close')}><Icon name="x" /></button>
           </div>
           <div className="nav-section">

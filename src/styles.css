@@ -172,7 +172,13 @@ label.inline { display: inline-flex; align-items: center; gap: 6px; font-size: 0
   background: var(--surface); color: var(--text-3); cursor: pointer; font-size: 0.9rem;
 }
 .search-trigger kbd { margin-left: auto; font-size: 0.75rem; border: 1px solid var(--border); border-radius: 4px; padding: 0 5px; }
-.menu-btn { display: none; }
+.menu-btn { display: inline-flex; }
+.drawer-close { display: none !important; }
+@media (min-width: 1024px) {
+  .layout { transition: grid-template-columns 0.2s ease; }
+  .layout.collapsed { grid-template-columns: 0px minmax(0, 1fr); }
+  .layout.collapsed .sidebar { visibility: hidden; overflow: hidden; padding-left: 0; padding-right: 0; border-right-width: 0; }
+}
 .layout { display: grid; grid-template-columns: var(--sidebar-w) minmax(0, 1fr); min-height: calc(100vh - var(--topbar-h)); }
 .sidebar {
   position: sticky; top: var(--topbar-h); align-self: start;
@@ -201,7 +207,7 @@ label.inline { display: inline-flex; align-items: center; gap: 6px; font-size: 0
 
 @media (max-width: 1023px) {
   .layout { grid-template-columns: minmax(0, 1fr); }
-  .menu-btn { display: inline-flex; }
+  .drawer-close { display: flex !important; }
   .sidebar {
     position: fixed; z-index: 60; left: 0; top: 0; height: 100dvh; width: min(320px, 86vw);
     transform: translateX(-102%); transition: transform 0.2s ease; box-shadow: var(--shadow);
@@ -320,10 +326,10 @@ table.data th { font-size: 0.8rem; color: var(--text-3); font-weight: 600; text-
 .summary li { margin: 6px 0; }
 .lesson-foot { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between; align-items: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border); }
 .pager { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; }
-.pager a { display: block; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--radius); text-decoration: none; color: var(--text); background: var(--surface); min-width: 0; }
+.pager a { display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; gap: 2px; min-height: 64px; padding: 12px 14px; border: 1px solid var(--border); border-radius: var(--radius); text-decoration: none; color: var(--text); background: var(--surface); min-width: 0; }
 .pager a:hover { border-color: var(--accent); }
-.pager .dir { font-size: 0.78rem; color: var(--text-3); display: block; }
-.pager .next { text-align: right; grid-column: 2; }
+.pager .dir { font-size: 0.78rem; color: var(--text-3); }
+.pager .next { grid-column: 2; }
 .figure { margin: 0; }
 .figure figcaption { font-size: 0.85rem; color: var(--text-3); margin-top: 8px; text-align: center; }
 .diagram { border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface); padding: 12px; overflow-x: auto; }
